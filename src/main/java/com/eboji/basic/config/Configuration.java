@@ -14,14 +14,11 @@ import com.eboji.basic.pojo.HomeExample;
 import com.eboji.basic.service.ConfigService;
 import com.eboji.basic.service.HomeService;
 import com.eboji.basic.util.Constant;
-import com.eboji.basic.util.MemcacheUtil;
 
 @Component("configComp")
 public class Configuration implements InitializingBean {
 	private final static Logger logger = LoggerFactory.getLogger(Configuration.class.getPackage().getName());
 
-	private MemcacheUtil memcacheUtil = null;
-	
 	private String zookeeperURL = null;
 	
 	private Integer zookeeperTimeOut = null;
@@ -42,35 +39,12 @@ public class Configuration implements InitializingBean {
 		List<Home> homeList = homeService.selectHomeByExample(he);
 		logger.error(homeList.get(0).getHomedesc());
 		
-		String memcacheName = "default-memcache";
-		String[] servers = null;
-		Integer[] weights = null;
-		
-		List<CfgServers> cfgServers = configService.listMemcacheServers(Constant.MEMCACHE_TYPE);
-		
-		if(cfgServers != null && cfgServers.size() > 0) {
-			servers = new String[cfgServers.size()];
-			weights = new Integer[cfgServers.size()];
-			memcacheName = cfgServers.get(0).getServername();
-			for(int i = 0; i < cfgServers.size(); i++) {
-				CfgServers cfgServer = cfgServers.get(i);
-				servers[i] = cfgServer.getServer() + ":" + cfgServer.getPort();
-				weights[i] = cfgServer.getWeight();
-			}
-			
-			memcacheUtil = new MemcacheUtil(memcacheName, servers, weights);
-		}
-		
-		cfgServers = configService.listMemcacheServers(Constant.ZOOKEEPER_TYPE);
+		List<CfgServers> cfgServers = configService.listMemcacheServers(Constant.ZOOKEEPER_TYPE);
 		if(cfgServers != null && cfgServers.size() > 0) {
 			zookeeperURL = cfgServers.get(0).getServer() + ":" + cfgServers.get(0).getPort();
 			zookeeperTimeOut = cfgServers.get(0).getWeight();
 			zookeeperPath = cfgServers.get(0).getServername();
 		}
-	}
-
-	public MemcacheUtil getMemcacheUtil() {
-		return memcacheUtil;
 	}
 
 	public String getZookeeperURL() {

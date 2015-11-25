@@ -15,7 +15,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Component
 @EnableWebMvc
-@ComponentScan(basePackages = { "com.shijie99.basic" }
+@ComponentScan(basePackages = { "com.eboji.basic" }
 )
 public class MvcConfig extends WebMvcConfigurerAdapter {
 	@Override

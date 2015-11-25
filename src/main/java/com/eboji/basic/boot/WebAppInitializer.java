@@ -4,7 +4,6 @@ import javax.servlet.FilterRegistration.Dynamic;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
-import org.apache.logging.log4j.web.Log4jServletContextListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -15,17 +14,30 @@ public class WebAppInitializer extends
 	@Override
 	public void onStartup(ServletContext servletContext)
 			throws ServletException {
-//		String log4jConfiguration = System.getProperty("log4jConfiguration");
-//		System.out.println("log4jConfiguration:" + log4jConfiguration);
-//		if(null != log4jConfiguration && !"".equals(log4jConfiguration)) {
-//			if(new File(log4jConfiguration).exists()) {
-//				servletContext.setInitParameter("log4jConfiguration", "file://" + log4jConfiguration);
-//			} else {
-//				System.out.println(log4jConfiguration + " is not exist, use defaut log4jConfiguration");
-//			}
-//		}
+		/**
+		 * 读取conf文件夹中的logback.xml配置文件
+		 * warParent:/home/zhoucl/var/server/tomcat5/webapps/webapp-quickstart/
+		 */
 		
-        servletContext.addListener(Log4jServletContextListener.class);
+		/* 正式环境打开此处代码，根据应用服务器修改logback对应的配置目录
+		String warParent = servletContext.getRealPath("/");
+		warParent.substring(0, warParent.lastIndexOf("webapps"));
+		String logback = warParent + "logback-conf/logback.xml";
+		
+		File logbackFile = new File(logback);
+		if (logbackFile.exists()) {
+           LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+           JoranConfigurator configurator = new JoranConfigurator();
+           configurator.setContext(lc);
+           lc.reset();
+           try {
+               configurator.doConfigure(logbackFile);
+           }
+           catch (JoranException e) {
+               e.printStackTrace(System.err);
+               System.exit(-1);
+           }
+       }*/
         
 		super.onStartup(servletContext);
 		

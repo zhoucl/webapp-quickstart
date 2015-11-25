@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author zhoucl
  */
 @Configuration
-@ComponentScan(value = { "org.shijie99.basic" },
+@ComponentScan(value = { "com.eboji.basic" },
 	excludeFilters = 
 	{ 
 		@ComponentScan.Filter(type = FilterType.ANNOTATION, 
