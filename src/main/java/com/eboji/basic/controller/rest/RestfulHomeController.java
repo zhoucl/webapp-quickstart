@@ -1,5 +1,6 @@
 package com.eboji.basic.controller.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.eboji.basic.pojo.Home;
 import com.eboji.basic.pojo.HomeExample;
 import com.eboji.basic.service.HomeService;
+import com.eboji.basic.vo.BusinessLine;
+import com.eboji.basic.vo.RootVO;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 
 @RestController
@@ -51,5 +54,20 @@ public class RestfulHomeController {
 		} else {
 			return null;
 		}
+	}
+	
+	@RequestMapping(value = "/xml", method = RequestMethod.GET)
+	@ResponseBody
+	public RootVO getRootVO() {
+		RootVO rVo = new RootVO();
+		List<BusinessLine> blList = new ArrayList<BusinessLine>();
+		rVo.setBizLine(blList);
+		for(int i = 0; i < 2; i++) {
+			BusinessLine bl = new BusinessLine();
+			bl.setId(String.valueOf(i));
+			bl.setName("name" + i);
+			blList.add(bl);
+		}
+		return rVo;
 	}
 }

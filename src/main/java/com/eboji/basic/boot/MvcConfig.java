@@ -8,6 +8,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,10 +48,11 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void configureMessageConverters(
 			List<HttpMessageConverter<?>> converters) {
-		StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
-        stringConverter.setWriteAcceptCharset(false);
-        converters.add(new MappingJackson2HttpMessageConverter());
-        
+		converters.add(new StringHttpMessageConverter());
+		converters.add(new MappingJackson2HttpMessageConverter());
+		//converters.add(new MappingJackson2XmlHttpMessageConverter());
+		converters.add(new Jaxb2RootElementHttpMessageConverter());
+		
 		super.configureMessageConverters(converters);
 	}
 	
