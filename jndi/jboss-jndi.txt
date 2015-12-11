@@ -1,0 +1,33 @@
+JBOSS7在Standalone部署模式下，配置JNDI数据源步骤如下：
+1. 在%JBOSS_HOME%\modules目录，如果没有，则新建com\mysql\main目录
+2. 复制modules\com\h2database\h2\main下的module.xml至com\mysql\main目录，并进行如下修改：
+	<module xmlns="urn:jboss:module:1.1" name="com.mysql">
+
+		<resources>
+			<!-- 这个mysql的jdbc驱动 -->
+			<resource-root path="mysql-connector-java-5.1.7-bin.jar"/>
+			<!-- Insert resources here -->
+		</resources>
+		<dependencies>
+			<module name="javax.api"/>
+		</dependencies>
+	</module>
+3. 拷贝2中配置的mysql-connector-java-5.1.7-bin.jar至com\mysql\main目录；
+4. 修改%JBOSS_HOME%\standalone\configuration\standalone.xml，如下所示：
+	<datasources>
+		... ...
+		<datasource jndi-name="java:/ptDS" pool-name="mysqlPool" enabled="true" use-java-context="true">
+			<connection-url>jdbc:mysql://192.168.1.101:3306/tpf</connection-url>
+			<driver>mysql</driver>
+			<security>
+				<user-name>root</user-name>
+				<password>gtsj234234</password>
+			</security>
+		</datasource>
+		
+		<drivers>
+			... ...
+			<driver name="mysql" module="com.mysql"/>
+		</drivers>
+	</datasources>
+5. 配置完成，通过ds = (DataSource) ctx.lookup("java:/ptDS"); 进行JNDI的访问

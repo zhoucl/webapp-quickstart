@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.eboji.basic.biz.HomeBiz;
 import com.eboji.basic.config.Configuration;
@@ -29,6 +30,7 @@ public class HomeBizImpl implements HomeBiz {
 	private Configuration configComp;
 
 	@Override
+	@Transactional
 	public boolean index(String sessionID) {
 		List<Home> homes = homeService.selectHomeByExample(null);
 		List<CfgServers> cfgs = configService.listMemcacheServers(0);
@@ -42,14 +44,16 @@ public class HomeBizImpl implements HomeBiz {
 		home.setHomedesc("desc");
 		home.setRemark("remark");
 		
-		String[] str = new String[1024000];
 		try {
 			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+			Home h = new Home();
+			h.setHomedesc(home.getHomedesc());
+			h.setHomelink(home.getHomelink());
+			h.setRemark(home.getRemark());
+			homeService.insertHome(h);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
 		}
-		
-		logger.info("success ===> " + str.length);
 		
 		return true;
 	}

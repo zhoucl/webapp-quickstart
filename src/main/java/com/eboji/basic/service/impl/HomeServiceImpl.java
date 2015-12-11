@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.eboji.basic.dao.HomeMapper;
 import com.eboji.basic.pojo.Home;
@@ -22,8 +23,15 @@ public class HomeServiceImpl implements HomeService {
 	}
 
 	@Override
+	@Transactional
 	public List<Home> selectHomeByPager(HomeExample he, PageBounds pageBounds) {
 		return homeMapper.selectByExample(he, pageBounds);
 	}
 
+	@Override
+	public void insertHome(Home home) throws Exception {
+		int count = homeMapper.insertSelective(home);
+		System.out.println(count);
+		throw new Exception("产生异常，需要进行回滚!");
+	}
 }

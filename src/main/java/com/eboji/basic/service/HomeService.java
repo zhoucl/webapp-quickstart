@@ -10,4 +10,6 @@ public interface HomeService {
 	List<Home> selectHomeByExample(HomeExample he);
 	
 	List<Home> selectHomeByPager(HomeExample he, PageBounds pageBounds);
+	
+	void insertHome(Home home) throws Exception;
 }
