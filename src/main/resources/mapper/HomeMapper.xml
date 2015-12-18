@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.eboji.basic.dao.HomeMapper">
+<mapper namespace="com.eboji.dao.HomeMapper">
 	<cache eviction="FIFO"
         flushInterval="60000"
         size="512"
         readOnly="true" />
         
-	<resultMap id="BaseResultMap" type="com.eboji.basic.pojo.Home">
+	<resultMap id="BaseResultMap" type="com.eboji.pojo.Home">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="homelink" property="homelink" jdbcType="VARCHAR" />
 		<result column="homedesc" property="homedesc" jdbcType="VARCHAR" />
@@ -79,7 +79,7 @@
 		id, homelink, homedesc, remark
 	</sql>
 	<select id="selectByExample" resultMap="BaseResultMap"
-		parameterType="com.eboji.basic.pojo.HomeExample">
+		parameterType="com.eboji.pojo.HomeExample">
 		select
 		<if test="distinct">
 			distinct
@@ -104,20 +104,20 @@
 		delete from home
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
-	<delete id="deleteByExample" parameterType="com.eboji.basic.pojo.HomeExample">
+	<delete id="deleteByExample" parameterType="com.eboji.pojo.HomeExample">
 		delete from home
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</delete>
-	<insert id="insert" parameterType="com.eboji.basic.pojo.Home">
+	<insert id="insert" parameterType="com.eboji.pojo.Home">
 		insert into home (id, homelink, homedesc,
 		remark)
 		values (#{id,jdbcType=INTEGER}, #{homelink,jdbcType=VARCHAR},
 		#{homedesc,jdbcType=VARCHAR},
 		#{remark,jdbcType=VARCHAR})
 	</insert>
-	<insert id="insertSelective" parameterType="com.eboji.basic.pojo.Home">
+	<insert id="insertSelective" parameterType="com.eboji.pojo.Home">
 		insert into home
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -148,7 +148,7 @@
 			</if>
 		</trim>
 	</insert>
-	<select id="countByExample" parameterType="com.eboji.basic.pojo.HomeExample"
+	<select id="countByExample" parameterType="com.eboji.pojo.HomeExample"
 		resultType="java.lang.Integer">
 		select count(*) from home
 		<if test="_parameter != null">
@@ -185,7 +185,7 @@
 			<include refid="Update_By_Example_Where_Clause" />
 		</if>
 	</update>
-	<update id="updateByPrimaryKeySelective" parameterType="com.eboji.basic.pojo.Home">
+	<update id="updateByPrimaryKeySelective" parameterType="com.eboji.pojo.Home">
 		update home
 		<set>
 			<if test="homelink != null">
@@ -200,7 +200,7 @@
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
-	<update id="updateByPrimaryKey" parameterType="com.eboji.basic.pojo.Home">
+	<update id="updateByPrimaryKey" parameterType="com.eboji.pojo.Home">
 		update home
 		set homelink = #{homelink,jdbcType=VARCHAR},
 		homedesc = #{homedesc,jdbcType=VARCHAR},
