@@ -19,7 +19,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Component
 @EnableWebMvc
-@ComponentScan(basePackages = { "com.eboji.basic.controller" },
+@ComponentScan(basePackages = { "com.eboji.controller" },
 	includeFilters = 
 	{ 
 		@ComponentScan.Filter(type = FilterType.ANNOTATION, 
@@ -50,7 +50,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 			List<HttpMessageConverter<?>> converters) {
 		converters.add(new StringHttpMessageConverter());
 		converters.add(new MappingJackson2HttpMessageConverter());
-		//converters.add(new MappingJackson2XmlHttpMessageConverter());
+//		converters.add(new MappingJackson2XmlHttpMessageConverter());
 		converters.add(new Jaxb2RootElementHttpMessageConverter());
 		
 		super.configureMessageConverters(converters);
