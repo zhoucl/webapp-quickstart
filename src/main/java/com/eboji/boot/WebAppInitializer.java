@@ -38,14 +38,14 @@ public class WebAppInitializer extends
                System.exit(-1);
            }
        }*/
-        
+		
 		super.onStartup(servletContext);
 		
-		Dynamic regist = servletContext.addFilter("encoding", CharacterEncodingFilter.class);
-		regist.setInitParameter("encoding", "UTF-8");
-		regist.setInitParameter("forceEncoding", "true");
-		regist.setAsyncSupported(true);
-		regist.addMappingForUrlPatterns(null, true, "/");
+		Dynamic encodingFilter = servletContext.addFilter("encoding", CharacterEncodingFilter.class);
+		encodingFilter.setInitParameter("encoding", "UTF-8");
+		encodingFilter.setInitParameter("forceEncoding", "true");
+		encodingFilter.setAsyncSupported(true);
+		encodingFilter.addMappingForUrlPatterns(null, true, "/");
 	}
 
 	@Override
