@@ -1,12 +1,11 @@
 package com.eboji.dao;
 
-import com.eboji.pojo.Home;
-import com.eboji.pojo.HomeExample;
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+
+import com.eboji.pojo.Home;
+import com.eboji.pojo.HomeExample;
 
 public interface HomeMapper {
     int countByExample(HomeExample example);
@@ -19,7 +18,7 @@ public interface HomeMapper {
 
     int insertSelective(Home record);
 
-    List<Home> selectByExample(HomeExample example, PageBounds pageBounds);
+    List<Home> selectByExample(HomeExample example);
 
     Home selectByPrimaryKey(Integer id);
 

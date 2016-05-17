@@ -24,7 +24,7 @@ import junit.framework.TestCase;
     @ContextConfiguration(name = "child", classes = MvcConfig.class)  
 })
 @Transactional
-@WebAppConfiguration(value = "webapp-quickstart/src/main/webapp")
+@WebAppConfiguration(value = "quick-start/src/main/webapp")
 public class BaseTestCase extends TestCase {
 	@Test
 	public void defaultTest() {

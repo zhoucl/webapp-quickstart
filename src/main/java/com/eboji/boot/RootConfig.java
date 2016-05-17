@@ -3,10 +3,6 @@ package com.eboji.boot;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-/**
- * 配置类入口
- * @author zhoucl
- */
 @Configuration
 @Import({
 	SpringConfig.class, 		//spring 初始化bean相关的配置

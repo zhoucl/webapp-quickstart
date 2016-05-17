@@ -13,13 +13,13 @@ import org.springframework.stereotype.Component;
 import com.eboji.util.JmxClientUtil;
 
 @Component
-public class InitializationApplicationListener implements
+public class InitApplicationListener implements
 		ApplicationListener<ApplicationEvent> {
-	private static final Logger logger = LoggerFactory.getLogger(InitializationApplicationListener.class);
+	private static final Logger logger = LoggerFactory.getLogger(ApplicationListener.class);
 	
 	@Override
 	public void onApplicationEvent(ApplicationEvent event) {
-		logger.info("InitializationApplicationListener...");
+		logger.info("InitializationApplicationListener..." + event.getSource().toString());
 		
 		if(event instanceof ContextStartedEvent) {
 			//TODO 容器启动完成事件

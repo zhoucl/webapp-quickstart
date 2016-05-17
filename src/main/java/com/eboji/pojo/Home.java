@@ -1,11 +1,7 @@
 package com.eboji.pojo;
 
-import java.io.Serializable;
-
-public class Home implements Serializable {
-	private static final long serialVersionUID = 8657203590187362185L;
-
-	private Integer id;
+public class Home {
+    private Integer id;
 
     private String homelink;
 

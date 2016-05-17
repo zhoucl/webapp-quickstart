@@ -19,7 +19,7 @@ public class WebAppInitializer extends
 		 * warParent:/home/zhoucl/var/server/tomcat5/webapps/webapp-quickstart/
 		 */
 		
-		/* 正式环境打开此处代码，根据应用服务器修改logback对应的配置目录
+		/** 正式环境打开此处代码，根据应用服务器修改logback对应的配置目录
 		String warParent = servletContext.getRealPath("/");
 		warParent.substring(0, warParent.lastIndexOf("webapps"));
 		String logback = warParent + "logback-conf/logback.xml";
@@ -41,11 +41,11 @@ public class WebAppInitializer extends
 		
 		super.onStartup(servletContext);
 		
-		Dynamic encodingFilter = servletContext.addFilter("encoding", CharacterEncodingFilter.class);
-		encodingFilter.setInitParameter("encoding", "UTF-8");
-		encodingFilter.setInitParameter("forceEncoding", "true");
-		encodingFilter.setAsyncSupported(true);
-		encodingFilter.addMappingForUrlPatterns(null, true, "/");
+		Dynamic regist = servletContext.addFilter("encoding", CharacterEncodingFilter.class);
+		regist.setInitParameter("encoding", "UTF-8");
+		regist.setInitParameter("forceEncoding", "true");
+		regist.setAsyncSupported(true);
+		regist.addMappingForUrlPatterns(null, true, "/");
 	}
 
 	@Override
