@@ -18,7 +18,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.eboji.converter.FastJsonpHttpMessageConverter;
 
 @Configuration
 @EnableWebMvc
@@ -53,11 +53,13 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
         stringConverter.setWriteAcceptCharset(false);
         
-        FastJsonHttpMessageConverter jsonConverter = new FastJsonHttpMessageConverter();
+        FastJsonpHttpMessageConverter jsonConverter = new FastJsonpHttpMessageConverter();
         List<MediaType> jsonMediaTypes = new ArrayList<MediaType>();
-        jsonMediaTypes.add(MediaType.valueOf(MediaType.TEXT_HTML_VALUE + ";charset=UTF-8"));
         jsonMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
         jsonConverter.setSupportedMediaTypes(jsonMediaTypes);
+        
+//        MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
+//        jsonConverter.setSupportedMediaTypes(jsonMediaTypes);
         
         Jaxb2RootElementHttpMessageConverter xmlConverter = new Jaxb2RootElementHttpMessageConverter();
         List<MediaType> xmlMediaTypes = new ArrayList<MediaType>();
